@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
+    <classPathEntry location="C:\Program Files (x86)\MySQL\Connector J 8.0\mysql-connector-java-8.0.16.jar"/>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- JavaBean 实现 序列化 接口 -->
+        <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />-->
+        <!-- 生成toString -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- optional，旨在创建class时，对注释进行控制 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/train?serverTimezone=GMT"
+                        userId="root"
+                        password="root">
+            <property name="nullCatalogMeansCurrent" value="true"></property>
+        </jdbcConnection>
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal,
+                false: 把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer(默认)
+                true:  把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal
+            -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.lemon.train.entity" targetProject="src/main/java">
+            <!-- 默认false 是否允许子包 -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 默认false 是否对model添加 构造函数 -->
+            <property name="constructorBased" value="false"/>
+            <!-- 默认false 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+            <!-- 默认false 是否对类CHAR类型的列的数据进行trim操作 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lemon.train.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <!-- <table tableName="risk_model_order" domainObjectName="DSRiskModelOrder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="tel_bill_record" domainObjectName="DSTelBillRecord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+<!--         <table tableName="user"></table>-->
+<!--        <table tableName="traininfos"></table>-->
+<!--        <table tableName="orders"></table>-->
+<!--        <table tableName="orderinfo"></table>-->
+<!--        <table tableName="train"></table>-->
+<!--        <table tableName="traininfo"></table>-->
+<!--        <table tableName="trainticket"></table>-->
+<!--        <table tableName="trainstate"></table>-->
+<!--        <table tableName="trainseat"></table>-->
+<!--        <table tableName="orderseat"></table>-->
+<!--        <table tableName="seatinfo"></table>-->
+<!--        <table tableName="holiday"></table>-->
+        <table tableName="pricemanage"></table>
+
+    </context>
+
+</generatorConfiguration>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemon.train.mapper.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.lemon.train.entity.Orders">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="traindate" jdbcType="DATE" property="traindate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="train_id" jdbcType="INTEGER" property="trainId" />
+    <result column="seattype" jdbcType="INTEGER" property="seattype" />
+    <result column="carriage" jdbcType="INTEGER" property="carriage" />
+    <result column="seat" jdbcType="VARCHAR" property="seat" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, status, price, traindate, createtime, user_id, train_id, seattype, carriage, 
+    seat, order_id
+  </sql>
+  <select id="selectByExample" parameterType="com.lemon.train.entity.OrdersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lemon.train.entity.OrdersExample">
+    delete from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lemon.train.entity.Orders">
+    insert into orders (id, status, price, 
+      traindate, createtime, user_id, 
+      train_id, seattype, carriage, 
+      seat, order_id)
+    values (#{id,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{traindate,jdbcType=DATE}, #{createtime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{trainId,jdbcType=INTEGER}, #{seattype,jdbcType=INTEGER}, #{carriage,jdbcType=INTEGER}, 
+      #{seat,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lemon.train.entity.Orders">
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="traindate != null">
+        traindate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="trainId != null">
+        train_id,
+      </if>
+      <if test="seattype != null">
+        seattype,
+      </if>
+      <if test="carriage != null">
+        carriage,
+      </if>
+      <if test="seat != null">
+        seat,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="traindate != null">
+        #{traindate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="trainId != null">
+        #{trainId,jdbcType=INTEGER},
+      </if>
+      <if test="seattype != null">
+        #{seattype,jdbcType=INTEGER},
+      </if>
+      <if test="carriage != null">
+        #{carriage,jdbcType=INTEGER},
+      </if>
+      <if test="seat != null">
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lemon.train.entity.OrdersExample" resultType="java.lang.Long">
+    select count(*) from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update orders
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.traindate != null">
+        traindate = #{record.traindate,jdbcType=DATE},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainId != null">
+        train_id = #{record.trainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.seattype != null">
+        seattype = #{record.seattype,jdbcType=INTEGER},
+      </if>
+      <if test="record.carriage != null">
+        carriage = #{record.carriage,jdbcType=INTEGER},
+      </if>
+      <if test="record.seat != null">
+        seat = #{record.seat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update orders
+    set id = #{record.id,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      traindate = #{record.traindate,jdbcType=DATE},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      train_id = #{record.trainId,jdbcType=INTEGER},
+      seattype = #{record.seattype,jdbcType=INTEGER},
+      carriage = #{record.carriage,jdbcType=INTEGER},
+      seat = #{record.seat,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lemon.train.entity.Orders">
+    update orders
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="traindate != null">
+        traindate = #{traindate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="trainId != null">
+        train_id = #{trainId,jdbcType=INTEGER},
+      </if>
+      <if test="seattype != null">
+        seattype = #{seattype,jdbcType=INTEGER},
+      </if>
+      <if test="carriage != null">
+        carriage = #{carriage,jdbcType=INTEGER},
+      </if>
+      <if test="seat != null">
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lemon.train.entity.Orders">
+    update orders
+    set status = #{status,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      traindate = #{traindate,jdbcType=DATE},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      train_id = #{trainId,jdbcType=INTEGER},
+      seattype = #{seattype,jdbcType=INTEGER},
+      carriage = #{carriage,jdbcType=INTEGER},
+      seat = #{seat,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+<!--  剩余车票update-->
+  <update id="decreaseTrainNum">
+    UPDATE trainticket
+    set
+    <if test="type==1">
+        fnum=fnum-1
+    </if>
+    <if test="type==2">
+      snum=snum-1
+    </if>
+    where train_id=#{trainId}
+    and ticketdate=#{traindate} and
+    <if test="type==1">
+     fnum&gt;0
+    </if>
+    <if test="type==2">
+      snum&gt;0
+    </if>
+  </update>
+
+  <!--  增加车票-->
+  <update id="increaseTrainNum">
+    UPDATE trainticket
+    set
+    <if test="type==1">
+      fnum=fnum+1
+    </if>
+    <if test="type==2">
+      snum=snum+1
+    </if>
+    where train_id=#{trainId}
+    and ticketdate=#{traindate} and
+    <if test="type==1">
+      fnum &lt;10
+    </if>
+    <if test="type==2">
+      snum &lt;10
+    </if>
+  </update>
+
+
+  <update id="updateOrderState" parameterType="Integer">
+    update orders
+    set status=3
+    where order_id=#{id}
+    and (status=2 or status=1)
+    and traindate&lt;=date(now())
+  </update>
+</mapper>

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemon.train.mapper.TraininfoMapper">
+  <resultMap id="BaseResultMap" type="com.lemon.train.entity.Traininfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="startcity" jdbcType="VARCHAR" property="startcity" />
+    <result column="starttime" jdbcType="TIME" property="starttime" />
+    <result column="endcity" jdbcType="VARCHAR" property="endcity" />
+    <result column="endtime" jdbcType="TIME" property="endtime" />
+    <result column="fprice" jdbcType="DECIMAL" property="fprice" />
+    <result column="sprice" jdbcType="DECIMAL" property="sprice" />
+    <result column="fnum" jdbcType="INTEGER" property="fnum" />
+    <result column="snum" jdbcType="INTEGER" property="snum" />
+    <result column="train_id" jdbcType="INTEGER" property="trainId" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, startcity, starttime, endcity, endtime, fprice, sprice, fnum, snum, train_id, 
+    duration
+  </sql>
+  <select id="selectByExample" parameterType="com.lemon.train.entity.TraininfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from traininfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from traininfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from traininfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lemon.train.entity.TraininfoExample">
+    delete from traininfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lemon.train.entity.Traininfo">
+    insert into traininfo (id, startcity, starttime, 
+      endcity, endtime, fprice, 
+      sprice, fnum, snum, 
+      train_id, duration)
+    values (#{id,jdbcType=INTEGER}, #{startcity,jdbcType=VARCHAR}, #{starttime,jdbcType=TIME}, 
+      #{endcity,jdbcType=VARCHAR}, #{endtime,jdbcType=TIME}, #{fprice,jdbcType=DECIMAL}, 
+      #{sprice,jdbcType=DECIMAL}, #{fnum,jdbcType=INTEGER}, #{snum,jdbcType=INTEGER}, 
+      #{trainId,jdbcType=INTEGER}, #{duration,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lemon.train.entity.Traininfo">
+    insert into traininfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="startcity != null">
+        startcity,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endcity != null">
+        endcity,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="fprice != null">
+        fprice,
+      </if>
+      <if test="sprice != null">
+        sprice,
+      </if>
+      <if test="fnum != null">
+        fnum,
+      </if>
+      <if test="snum != null">
+        snum,
+      </if>
+      <if test="trainId != null">
+        train_id,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="startcity != null">
+        #{startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIME},
+      </if>
+      <if test="endcity != null">
+        #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIME},
+      </if>
+      <if test="fprice != null">
+        #{fprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sprice != null">
+        #{sprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fnum != null">
+        #{fnum,jdbcType=INTEGER},
+      </if>
+      <if test="snum != null">
+        #{snum,jdbcType=INTEGER},
+      </if>
+      <if test="trainId != null">
+        #{trainId,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lemon.train.entity.TraininfoExample" resultType="java.lang.Long">
+    select count(*) from traininfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update traininfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.startcity != null">
+        startcity = #{record.startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        starttime = #{record.starttime,jdbcType=TIME},
+      </if>
+      <if test="record.endcity != null">
+        endcity = #{record.endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null">
+        endtime = #{record.endtime,jdbcType=TIME},
+      </if>
+      <if test="record.fprice != null">
+        fprice = #{record.fprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sprice != null">
+        sprice = #{record.sprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fnum != null">
+        fnum = #{record.fnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.snum != null">
+        snum = #{record.snum,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainId != null">
+        train_id = #{record.trainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.duration != null">
+        duration = #{record.duration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update traininfo
+    set id = #{record.id,jdbcType=INTEGER},
+      startcity = #{record.startcity,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=TIME},
+      endcity = #{record.endcity,jdbcType=VARCHAR},
+      endtime = #{record.endtime,jdbcType=TIME},
+      fprice = #{record.fprice,jdbcType=DECIMAL},
+      sprice = #{record.sprice,jdbcType=DECIMAL},
+      fnum = #{record.fnum,jdbcType=INTEGER},
+      snum = #{record.snum,jdbcType=INTEGER},
+      train_id = #{record.trainId,jdbcType=INTEGER},
+      duration = #{record.duration,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lemon.train.entity.Traininfo">
+    update traininfo
+    <set>
+      <if test="startcity != null">
+        startcity = #{startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=TIME},
+      </if>
+      <if test="endcity != null">
+        endcity = #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIME},
+      </if>
+      <if test="fprice != null">
+        fprice = #{fprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sprice != null">
+        sprice = #{sprice,jdbcType=DECIMAL},
+      </if>
+      <if test="fnum != null">
+        fnum = #{fnum,jdbcType=INTEGER},
+      </if>
+      <if test="snum != null">
+        snum = #{snum,jdbcType=INTEGER},
+      </if>
+      <if test="trainId != null">
+        train_id = #{trainId,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lemon.train.entity.Traininfo">
+    update traininfo
+    set startcity = #{startcity,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=TIME},
+      endcity = #{endcity,jdbcType=VARCHAR},
+      endtime = #{endtime,jdbcType=TIME},
+      fprice = #{fprice,jdbcType=DECIMAL},
+      sprice = #{sprice,jdbcType=DECIMAL},
+      fnum = #{fnum,jdbcType=INTEGER},
+      snum = #{snum,jdbcType=INTEGER},
+      train_id = #{trainId,jdbcType=INTEGER},
+      duration = #{duration,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+<!--  多表联查-->
+  <select id="selectTrainInfo" resultType="java.util.Map" >
+		select traininfo.id as id,t.id as trainId,t.name as name,startcity,Time(starttime) as starttime,endcity,Time(endtime) as endtime,
+		fprice,fnum,sprice,snum,duration
+		from traininfo,train t
+		where train_id=t.id
+	</select>
+
+<!--  查询列表id返回列表-->
+
+  <select id="selectTrainInfoByIdlist" resultMap="BaseResultMap" >
+		select train_id,fnum,snum
+		from traininfo
+		where train_id in
+    <foreach collection="idlist" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+	</select>
+
+</mapper>

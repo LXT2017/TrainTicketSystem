@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemon.train.mapper.OrderinfoMapper">
+  <resultMap id="BaseResultMap" type="com.lemon.train.entity.Orderinfo">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="seattype" jdbcType="INTEGER" property="seattype" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="carriage" jdbcType="INTEGER" property="carriage" />
+    <result column="seat" jdbcType="VARCHAR" property="seat" />
+    <result column="traindate" jdbcType="DATE" property="traindate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="trainname" jdbcType="VARCHAR" property="trainname" />
+    <result column="trainid" jdbcType="INTEGER" property="trainid" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="startcity" jdbcType="VARCHAR" property="startcity" />
+    <result column="starttime" jdbcType="TIME" property="starttime" />
+    <result column="endcity" jdbcType="VARCHAR" property="endcity" />
+    <result column="endtime" jdbcType="TIME" property="endtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, idcard, realname, seattype, status, carriage, seat, traindate, createtime, trainname, 
+    trainid, price, order_id, duration, startcity, starttime, endcity, endtime
+  </sql>
+  <select id="selectByExample" parameterType="com.lemon.train.entity.OrderinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.lemon.train.entity.OrderinfoExample">
+    delete from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lemon.train.entity.Orderinfo">
+    insert into orderinfo (id, idcard, realname, 
+      seattype, status, carriage, 
+      seat, traindate, createtime, 
+      trainname, trainid, price, 
+      order_id, duration, startcity, 
+      starttime, endcity, endtime
+      )
+    values (#{id,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
+      #{seattype,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{carriage,jdbcType=INTEGER}, 
+      #{seat,jdbcType=VARCHAR}, #{traindate,jdbcType=DATE}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{trainname,jdbcType=VARCHAR}, #{trainid,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{orderId,jdbcType=INTEGER}, #{duration,jdbcType=VARCHAR}, #{startcity,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIME}, #{endcity,jdbcType=VARCHAR}, #{endtime,jdbcType=TIME}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lemon.train.entity.Orderinfo">
+    insert into orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="seattype != null">
+        seattype,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="carriage != null">
+        carriage,
+      </if>
+      <if test="seat != null">
+        seat,
+      </if>
+      <if test="traindate != null">
+        traindate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="trainname != null">
+        trainname,
+      </if>
+      <if test="trainid != null">
+        trainid,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="startcity != null">
+        startcity,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endcity != null">
+        endcity,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="seattype != null">
+        #{seattype,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="carriage != null">
+        #{carriage,jdbcType=INTEGER},
+      </if>
+      <if test="seat != null">
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="traindate != null">
+        #{traindate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trainname != null">
+        #{trainname,jdbcType=VARCHAR},
+      </if>
+      <if test="trainid != null">
+        #{trainid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="startcity != null">
+        #{startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIME},
+      </if>
+      <if test="endcity != null">
+        #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lemon.train.entity.OrderinfoExample" resultType="java.lang.Long">
+    select count(*) from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update orderinfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.idcard != null">
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null">
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seattype != null">
+        seattype = #{record.seattype,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.carriage != null">
+        carriage = #{record.carriage,jdbcType=INTEGER},
+      </if>
+      <if test="record.seat != null">
+        seat = #{record.seat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traindate != null">
+        traindate = #{record.traindate,jdbcType=DATE},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.trainname != null">
+        trainname = #{record.trainname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trainid != null">
+        trainid = #{record.trainid,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.duration != null">
+        duration = #{record.duration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startcity != null">
+        startcity = #{record.startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        starttime = #{record.starttime,jdbcType=TIME},
+      </if>
+      <if test="record.endcity != null">
+        endcity = #{record.endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null">
+        endtime = #{record.endtime,jdbcType=TIME},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update orderinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      seattype = #{record.seattype,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      carriage = #{record.carriage,jdbcType=INTEGER},
+      seat = #{record.seat,jdbcType=VARCHAR},
+      traindate = #{record.traindate,jdbcType=DATE},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      trainname = #{record.trainname,jdbcType=VARCHAR},
+      trainid = #{record.trainid,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      duration = #{record.duration,jdbcType=VARCHAR},
+      startcity = #{record.startcity,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=TIME},
+      endcity = #{record.endcity,jdbcType=VARCHAR},
+      endtime = #{record.endtime,jdbcType=TIME}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

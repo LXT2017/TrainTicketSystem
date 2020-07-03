@@ -1,0 +1,23 @@
+server:
+  port: 8081
+spring:
+  #数据库连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/train?serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  #mybatis的相关配置
+  jackson:
+    time-zone: GMT+8
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zhg.demo.mybatis.entity
+  #开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
