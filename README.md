@@ -26,10 +26,11 @@ _:wrench:这次项目只做了简单的售票业务，而且假设每辆火车�
 
 ##### 帮助过程:trophy:
 
-1. 安装启动数据库Mysql8.0，打开可视化工具将train.sql数据库脚本文件导入。
+1. 安装启动数据库Mysql8.0，打开可视化工具将train.sql数据库脚本文件导入(不要直接运行脚本，在Navicat右键运行SQL文件，或者在DBeaver新建train，如何右键train数据库>工具>Restore database)。
 2. 启动服务端，安装打开Intellij IDEA软件，导入train项目文件夹，找到application.yml文件修改数据库连接配置(配置为自己环境的数据库连接配置)，完成后启动项目。
 3. 打开Vscode，导入vue-manage-system和train-user项目，代开vue.config.js文件可以进行端口号的修改，然后执行npm install安装依赖，最后执行npm run serve 运行程
 4. 管理员默认账号密码admin和123456，用户端已存在测试账号密码 匿名用户和123456
+5. 有些数据已经过期可以根据需求删减，火车查询列次是只能查询当前时间之后的火车班次
 
 -----
 
