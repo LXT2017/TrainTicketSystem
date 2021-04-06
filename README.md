@@ -4,7 +4,9 @@
 
 ----------
 ##### :100: 模块介绍
+
 train模块为后端项目，支持用户前端和管理后台的api请求；train-user为前端用户项目；vue-manage-system为管理后台项目，使用[后台模板](https://github.com/lin-xin/vue-manage-system)魔改的。
+
 ----------
 ##### :hammer:系统主要功能
 
