@@ -3,7 +3,9 @@
 :blush:本系统使用了Vue作为前端框架，Vant组件和element ui作为前端前端UI，后端使用了springboot和Mybatis，数据库使用了Mysql关系型数据库，具有用户移动端和web管理端两个终端。
 
 ----------
-
+##### :100: 模块介绍
+train模块为后端项目，支持用户前端和管理后台的api请求；train-user为前端用户项目；vue-manage-system为管理后台项目，使用[后台模板](https://github.com/lin-xin/vue-manage-system)魔改的。
+----------
 ##### :hammer:系统主要功能
 
 - [x] 火车票预订
